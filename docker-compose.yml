@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    container_name: mongo
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: daniels-booking
+    ports:
+      - '27017:27017'
+    volumes:
+      - ./mongo:/data/db
+
+  backend-api-booking:
+    build: .
+    volumes:
+      - ./src:/usr/src/app/src
+    command: npm run start:dev
+    ports:
+      - '8000:${PORT}'
+    depends_on:
+      - db
+    env_file:
+      - .env
+    environment:
+      MONGO_URI: mongodb://db:27017/daniels-booking
+      PORT: ${PORT}

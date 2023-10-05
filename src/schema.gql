@@ -1,0 +1,86 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Task {
+  _id: String!
+
+  """Task Number (maximum 25 characters)"""
+  taskNumber: String!
+
+  """Task Name (maximum 255 characters)"""
+  taskName: String!
+
+  """Task Description (maximum 1500 characters)"""
+  taskDescription: String!
+
+  """Due Date"""
+  dueDate: DateTime!
+
+  """Start Date"""
+  startDate: DateTime!
+
+  """Start Reminder Emails On"""
+  startReminderEmailsOn: DateTime!
+
+  """Reminder Email Frequency (in days)"""
+  reminderEmailFrequency: Int!
+
+  """Send Reminders To (one email address per line)"""
+  sendRemindersTo: [String!]!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  tasks: [Task!]!
+  task(id: String!): Task!
+  taskByDate(date: DateTime!): [Task!]!
+}
+
+type Mutation {
+  createTask(createTaskInput: CreateTaskInput!): Task!
+  updateTask(updateTaskInput: UpdateTaskInput!): Task!
+  removeTask(id: Int!): Task!
+}
+
+input CreateTaskInput {
+  """Task Number"""
+  taskNumber: String!
+
+  """Task Name"""
+  taskName: String!
+
+  """Task Description"""
+  taskDescription: String!
+
+  """Due Date"""
+  dueDate: DateTime!
+
+  """Start Date"""
+  startDate: DateTime!
+
+  """Start Reminder Emails On"""
+  startReminderEmailsOn: DateTime!
+
+  """Reminder Email Frequency"""
+  reminderEmailFrequency: Int!
+
+  """Send Reminders To"""
+  sendRemindersTo: [String!]!
+}
+
+input UpdateTaskInput {
+  taskNumber: String
+  taskName: String
+  taskDescription: String
+  dueDate: DateTime
+  startDate: DateTime
+  startReminderEmailsOn: DateTime
+  reminderEmailFrequency: Float
+  sendRemindersTo: [String!]
+  id: String!
+}
